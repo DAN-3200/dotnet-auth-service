@@ -1,0 +1,18 @@
+services:
+  db-main:
+    image: postgres:latest
+    container_name: db-user
+    environment: 
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+    # binding entre a realidade e o container
+    ports:
+      - 5600:5432
+    volumes:
+      - pg-user:/var/lib/postgress/database
+
+# Reponsável pela persitência de dados
+volumes:
+  pg-user:
