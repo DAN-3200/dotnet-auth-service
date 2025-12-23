@@ -8,30 +8,26 @@ public class UserUsecase
 {
    private IUserPorts repo;
 
-   public UserUsecase(IUserPorts repo)
-   {
+   public UserUsecase(IUserPorts repo) =>
       this.repo = repo;
-   }
 
-   public int SaveUser(UserEntity newUser)
-   {
-      return this.repo.SaveUser(newUser);
-   }
 
-   public UserEntity GetUser(int id)
-   {
-      return this.repo.GetUser(id);
-   }
+   public int SaveUser(RegisterDTO newUser) =>
+      this.repo.SaveUser(newUser);
 
-   public void EditUser(int id)
-   {
-      this.repo.EditUser(id);
-   }
 
-   public void DeletUser(int id)
-   {
+   public UserEntity GetUserInfo(int id) =>
+      this.repo.GetUser(id);
+
+
+   public void EditUser(EditDTO info) =>
+      this.repo.EditUser(info);
+
+
+   //  *role admin
+   public void DeletUser(int id) =>
       this.repo.DeletUser(id);
-   }
+
 
    // ------------------------------
 
