@@ -1,19 +1,24 @@
-using Entity;
+using DTO;
 using Usecase;
 
 namespace Controllers;
 
 public class UserControllers
 {
-   private UserUsecase usecase;
+   private readonly UserUsecase _usecase;
    public UserControllers(UserUsecase usecase)
    {
-      this.usecase = usecase;
+      this._usecase = usecase;
    }
 
-   public IResult SaveUser(UserEntity newUser)
+   public async Task<IResult> SaveUser(RegisterDto newUser)
    {
-      var response = usecase.SaveUser(newUser);
-      return Results.Ok(response);  
+      await _usecase.SaveUser(newUser);
+      return Results.Ok();
+   }
+   public async Task<IResult> GetUserInfo(Guid id)
+   {
+      var response = await _usecase.GetUserInfo(id);
+      return Results.Ok(response);
    }
 }

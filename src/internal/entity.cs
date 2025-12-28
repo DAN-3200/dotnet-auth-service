@@ -2,23 +2,34 @@ namespace Entity;
 
 public class UserEntity
 {
-   private int? Id;
-   private string Name;
-   private string Email;
-   private string Password;
-   private Role Role;
-   private DateTime CreatedAt;
+   public Guid Id { get; private set; }
+   public required string Name { get; set; }
+   public required string Email { get; set; }
+   public required string Password { get; set; }
+   public Role Role { get; set; }
+   public bool IsActive { get; set; }
+   public DateTime CreatedAt { get; set; }
 
-   public UserEntity(string Name, string Email, string Password)
+
+   private UserEntity()
    {
+   } // *só por causa do Entity Framework
+
+   public UserEntity(string Name, string Email, string PasswordHash)
+   {
+      this.Id = Guid.NewGuid();
       this.Name = Name;
       this.Email = Email;
-      this.Password = Password;
+      this.Password = PasswordHash;
+      this.Role = Role.Normal;
+      this.IsActive = true;
+      this.CreatedAt = DateTime.UtcNow;
    }
 }
 
 public enum Role
 {
-   Admin = 1,
-   Normal = 2
+   Normal = 1,
+   Admin = 2,
+
 }

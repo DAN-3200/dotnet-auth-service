@@ -5,8 +5,9 @@ namespace Ports;
 
 public interface IUserPorts
 {
-   int SaveUser(RegisterDTO newUser);
-   UserEntity GetUser(int id);
-   void EditUser(EditDTO info);
-   void DeletUser(int id);
+   Task SaveUser(RegisterDto newUser);
+   Task<UserEntity> GetUser(Guid id);
+   Task EditUser(EditDto info);
+   Task DeactivateUser(Guid id);
+   Task DeletUser(Guid id);
 } 

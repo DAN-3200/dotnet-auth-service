@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using DTO;
 using Entity;
 using Ports;
@@ -6,37 +7,36 @@ namespace Usecase;
 
 public class UserUsecase
 {
-   private IUserPorts repo;
+   private readonly IUserPorts _repo;
 
-   public UserUsecase(IUserPorts repo) =>
-      this.repo = repo;
-
-
-   public int SaveUser(RegisterDTO newUser) =>
-      this.repo.SaveUser(newUser);
-
-
-   public UserEntity GetUserInfo(int id) =>
-      this.repo.GetUser(id);
-
-
-   public void EditUser(EditDTO info) =>
-      this.repo.EditUser(info);
-
-
-   //  *role admin
-   public void DeletUser(int id) =>
-      this.repo.DeletUser(id);
-
+   public UserUsecase(IUserPorts repo) => this._repo = repo;
 
    // ------------------------------
 
-   public bool Login(LoginDTO login)
+   public async Task SaveUser(RegisterDto newUser) =>
+      await this._repo.SaveUser(newUser);
+
+   public async Task<UserEntity> GetUserInfo(Guid id) =>
+      await this._repo.GetUser(id);
+
+   public async Task EditUser(EditDto info) =>
+      await this._repo.EditUser(info);
+
+   //  *role admin
+   public async Task DeletUser(Guid id) =>
+     await this._repo.DeletUser(id);
+
+   public async Task DeactivateUser(Guid id) =>
+      await this._repo.DeactivateUser(id);
+
+   // ------------------------------
+
+   public bool Login(LoginDto login)
    {
       return true;
    }
 
-   public bool Logout(int id)
+   public bool Logout(Guid id)
    {
       return true;
    }
