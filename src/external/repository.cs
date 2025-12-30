@@ -19,7 +19,8 @@ public class UserRepository : IUserPorts
       var userMold = new UserEntity(
          newUser.Name,
          newUser.Email,
-         newUser.Password);
+         newUser.Password
+      );
 
       await _db.Users.AddAsync(userMold);
       await _db.SaveChangesAsync();
@@ -31,9 +32,9 @@ public class UserRepository : IUserPorts
       return response!;
    }
 
-   public async Task EditUser(EditDto info)
+   public async Task EditUser(Guid id ,EditDto info)
    {
-      var user = await _db.Users.FindAsync(info.Id);
+      var user = await _db.Users.FindAsync(id);
 
       if (info.Name is not null)
       {

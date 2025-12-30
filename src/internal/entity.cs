@@ -1,11 +1,14 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Entity;
 
 public class UserEntity
 {
+   [Key]
    public Guid Id { get; private set; }
-   public required string Name { get; set; }
-   public required string Email { get; set; }
-   public required string Password { get; set; }
+   public string? Name { get; set; }
+   public string? Email { get; set; }
+   public string? Password { get; set; }
    public Role Role { get; set; }
    public bool IsActive { get; set; }
    public DateTime CreatedAt { get; set; }
@@ -13,7 +16,7 @@ public class UserEntity
 
    private UserEntity()
    {
-   } // *só por causa do Entity Framework
+   }
 
    public UserEntity(string Name, string Email, string PasswordHash)
    {

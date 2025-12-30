@@ -2,3 +2,4 @@
 /obj
 .env
 appsettings.json
+.vscode
